@@ -1,9 +1,13 @@
 #pragma once
 #include "XcTradeApi.h"
-
+#include <vector>
+#include "TradeSig.h"
 class CSpi :public CXcTradeSpi
 {
 public:
+
+	CSpi(autoTrade *p):CXcTradeSpi(),m_pTradeObject(p)
+	{}
 	/* 断开提示*/
 	void OnClose(void);
 
@@ -25,4 +29,8 @@ public:
 	/* 反馈数据包模式数据行结束（Pack包模式）*/
 	void OnRecvPackEndRow(int iFunid, int iRefid, int iIssueType, int iSet, int iRow);
 
+	autoTrade* m_pTradeObject = nullptr;
+	vector<vector<pair<string, string>>>  m_currDataSet;
+
 };
+
